@@ -1,0 +1,44 @@
+div(ng-include='"components/menu/menu.html"')
+
+.container
+    p.input-group
+        form(name='searchForm', ng-submit='searchFunc(searchForm)')
+            div.panel.panel-primary
+                div.panel-heading
+                    h3.panel-title(translate='main.search')
+                div.panel-body
+                    h3(translate='main.discountHotels')
+                    h5(translate='main.searchAll')
+                    .form-group
+                        input.form-control(type='search', ng-model='searchForm.state', ng-options='countries.name for countries in countries[0].countries', placeholder='Rome, Paris, New York...', bs-typeahead='')
+
+                    .form-group
+                        h5(translate='main.date')
+                    .form-group(style="width: 46%;")
+                        input.form-control(type='text', ng-model='searchForm.date.fromDate', data-max-date='{{searchForm.date.untilDate}}', data-autoclose="true", data-min-date="today" placeholder='Check-in date', bs-datepicker='')
+                    .form-group(style="width: 46%;")
+                        input.form-control(type='text', ng-model='searchForm.date.untilDate', data-min-date='{{searchForm.date.fromDate}}', data-autoclose="true", placeholder='Check-out date', bs-datepicker='')
+                    .form-group
+                        h5(translate='main.rooms')
+                        section
+                            select(ng-model='searchForm.person.room', ng-options='rooms for rooms in search[0].room', style='color: black;')
+
+                    .form-group(ng-repeat='room in search[0].room', ng-show="$index < searchForm.person.room")
+                        row
+                            .col-sm-1
+                                p(translate='main.room')
+                            .col-sm-0
+                                p {{$index+1}} :
+                        section
+                            label(translate='main.adult')
+                            select(ng-model='searchForm.person[$index+1].adult', ng-options='adults for adults in search[0].adult', style='color: black;')
+                            label(translate='main.child')
+                            select(ng-model='searchForm.person[$index+1].child', ng-options='children for children in search[0].child', style='color: black;')
+
+
+                    button.btn.btn-default(type='submit', style="float: right;", ng-click='searchFunc()', ng-disabled='buttonDisabled', translate='main.searchNow')
+
+
+footer.footer
+  .container
+

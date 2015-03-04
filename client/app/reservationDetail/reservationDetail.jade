@@ -1,0 +1,275 @@
+div(ng-include='"components/menu/menu.html"')
+.container
+    .row
+        .col-sm-12
+            button.nav-clear.btn.btn-default(type='button', ng-click='back()') Back to booking list
+        .container
+            div.panel.panel-primary
+                div.panel-heading
+                    h3.panel-title Reservation Details
+                div.panel-body(ng-show="resDetail.status == 'Confirmed'")
+                    p.input-group
+                        form(name='cancelConfirmedForm', ng-submit='cancelConfirmedReservation(cancelConfirmedForm)')
+                            div(ng-model='cancelConfirmedForm.confirmedCancel.bid')
+                            span.form-btn
+                                button.btn.btn-primary(type='submit', style="float: right;", ng-click='cancelConfirmedReservation()', ng-disabled='cancelButtonDisabled') Cancel Reservation
+                    div.alert.alert-success(role='alert') {{resDetail.status}}
+                    .col-sm-8
+                        div(style="font-weight: bold; color: #0066FF;") {{resDetail.hotel.name}}
+                            label(style="font-weight: bold; color: #FF9900; padding: 10px;") Star:
+                                |   {{resDetail.hotel.star}}
+                        div(style="font-weight: bold;") Address:
+                            label(style="font-weight: normal; padding: 10px;") {{resDetail.hotel.address}}
+                        div(style="font-weight: bold;") CheckIn:
+                            label(style="font-weight: normal; padding: 10px;") {{resDetail.hotel.checkIn}}
+                        div(style="font-weight: bold;") CheckOut:
+                            label(style="font-weight: normal; padding: 10px;") {{resDetail.hotel.checkOut}}
+
+
+                    table.table
+                        thead
+                            tr
+                                th Room Type
+                                th Board Type
+                                th Quantity
+                                th Adult(s)
+                                th Child
+                                th Room Rate
+                        tbody
+                            tr(ng-repeat='rooms in resDetail.roomDetails.rooms')
+                                td {{rooms.roomType}}
+                                td {{rooms.boardType}}
+                                td {{rooms.quantity}}
+                                td {{rooms.adults}}
+                                td {{rooms.child}}
+                                td {{rooms.roomRate}}
+                        br
+                    table.table
+                        thead
+                            tr
+                                th Cancellation policy
+                                th Policy Type
+                                th From
+                                th To
+                                th Canc. Free
+                                th Detail
+                        tbody
+                            tr
+                                td {{resDetail.cancellation.cancPolicy}}
+                                td {{resDetail.cancellation.type}}
+                                td {{resDetail.cancellation.from}}
+                                td {{resDetail.cancellation.to}}
+                                td {{resDetail.cancellation.cancFree}}
+                                td {{resDetail.cancellation.detail}}
+
+                        br
+                    table.table
+                        thead
+                            tr
+                                th Room Type
+                                th Gender
+                                th First Name
+                                th Last Name
+                        tbody
+                            tr(ng-repeat='guestDetail in resDetail.guestDetails')
+                                    td {{guestDetail.roomType}}
+                                    td {{guestDetail.gender}}
+                                    td {{guestDetail.firstName}}
+                                    td {{guestDetail.lastName}}
+                        br
+                    table.table
+                        thead
+                            tr
+                                th Owner
+                                th Card Number
+                                th Status
+                                th Date
+                                th Total
+                        tbody
+                            tr
+                                td {{resDetail.paymentDetails.owner}}
+                                td {{resDetail.paymentDetails.cardNumber}}
+                                td {{resDetail.paymentDetails.status}}
+                                td {{resDetail.paymentDetails.date}}
+                                td {{resDetail.paymentDetails.total}}
+
+
+                div.panel-body(ng-show="resDetail.status == 'Pending'")
+                    p.input-group
+                        form(name='cancelPendingForm', ng-submit='cancelPendingReservation(cancelPendingForm)')
+                            div(ng-model='cancelPendingForm.pendingCancel.bid', ng-init='cancelPendingForm.pendingCancel.bid = resDetail.bid')
+                            span.form-btn
+                                button.btn.btn-primary(type='submit', style="float: right;", ng-click='cancelPendingReservation()', ng-disabled='cancelButtonDisabled') Cancel Reservation
+
+                    p.input-group
+                        form(name='pendingForm', ng-submit='addReservation(pendingForm)')
+                            div(ng-model='pendingForm.hotel.hid')
+                            div(ng-model='pendingForm.hotel.sid')
+                            div.alert.alert-warning(role='alert') {{resDetail.status}}
+                            .col-sm-8
+                                div(style="font-weight: bold; color: #0066FF;") {{resDetail.hotel.name}}
+                                    label(style="font-weight: bold; color: #FF9900; padding: 10px;") Star:
+                                        |   {{resDetail.hotel.star}}
+                                div(style="font-weight: bold;") Address:
+                                    label(style="font-weight: normal; padding: 10px;") {{resDetail.hotel.address}}
+                                div(style="font-weight: bold;") CheckIn:
+                                    label(style="font-weight: normal; padding: 10px;") {{resDetail.hotel.checkIn}}
+                                div(style="font-weight: bold;") CheckOut:
+                                    label(style="font-weight: normal; padding: 10px;") {{resDetail.hotel.checkOut}}
+
+
+                            table.table
+                                thead
+                                    tr
+                                        th Room Type
+                                        th Board Type
+                                        th Quantity
+                                        th Adult(s)
+                                        th Child
+                                        th Room Rate
+                                tbody
+                                    tr(ng-repeat='rooms in resDetail.roomDetails.rooms')
+                                        td {{rooms.roomType}}
+                                        td {{rooms.boardType}}
+                                        td {{rooms.quantity}}
+                                        td {{rooms.adults}}
+                                        td {{rooms.child}}
+                                        td {{rooms.roomRate}}
+                                br
+                            table.table
+                                thead
+                                    tr
+                                        th Cancellation policy
+                                        th Policy Type
+                                        th From
+                                        th To
+                                        th Canc. Free
+                                        th Detail
+                                tbody
+                                    tr
+                                        td {{resDetail.cancellation.cancPolicy}}
+                                        td {{resDetail.cancellation.type}}
+                                        td {{resDetail.cancellation.from}}
+                                        td {{resDetail.cancellation.to}}
+                                        td {{resDetail.cancellation.cancFree}}
+                                        td {{resDetail.cancellation.detail}}
+                                br
+                            table.table
+                                thead
+                                    tr
+                                        th Room Type
+                                        th Title
+                                        th First Name
+                                        th Last Name
+                                tbody
+                                    tr(ng-repeat='rooms in resDetail.roomDetails.rooms')
+                                        td {{rooms.roomType}}
+                                        td
+                                            section
+                                                select.form-control(ng-model='pendingForm.guest[$index+1].gender')
+                                                    option(value='mr') Mr.
+                                                    option(value='mrs') Mrs.
+                                        td
+                                            input.form-control(type='text', ng-model='pendingForm.guest[$index+1].firstName')
+                                        td
+                                            input.form-control(type='text', ng-model='pendingForm.guest[$index+1].lastName')
+                                br
+
+                            table.table
+                                thead
+                                    tr
+                                        th Credit Card InpendingFormation
+
+                                    tbody
+                                        tr
+                                            td
+                                                div.panel.panel-info
+                                                    div.panel-heading
+                                                        h4.panel-title
+                                                            a(data-toggle='collapse', data-parent='#accordion')
+                                                                | Bonus
+
+                                                .col-sm-4
+                                                    div(style="font-weight: normal;") Reservation Total:
+                                                    br
+                                                    div(style="font-weight: normal;") Card Number:
+                                                    br
+                                                    div(style="font-weight: normal;") Card Owner:
+                                                    br
+                                                    div(style="font-weight: normal;") Exp Date:
+                                                    br
+                                                    div(style="font-weight: normal;") Cvv:
+                                                .col-sm-4
+                                                    div(style="font-weight: bold; color: green; font-size: large;")
+                                                        | {{resDetail.cardPayment.resTotal}}
+
+                                                    input.form-control(style="float: right; margin-top: 10px;", type="text", ng-model='pendingForm.payment.cardNumber')
+
+                                                    input.form-control(style="float: right; margin-top: 10px;", type="text", ng-model='pendingForm.payment.cardOwner')
+
+                                                    section
+                                                        select(ng-model='pendingForm.payment.expMonth')
+                                                            option(value='1') 1
+                                                            option(value='2') 2
+                                                            option(value='3') 3
+                                                            option(value='4') 4
+                                                            option(value='5') 5
+                                                            option(value='6') 6
+                                                            option(value='7') 7
+                                                            option(value='8') 8
+                                                            option(value='9') 9
+                                                            option(value='10') 10
+                                                            option(value='11') 11
+                                                            option(value='12') 12
+                                                        select(ng-model='pendingForm.payment.expYear')
+                                                            option(value='2014') 2014
+                                                            option(value='2015') 2015
+                                                            option(value='2016') 2016
+                                                            option(value='2017') 2017
+                                                            option(value='2018') 2018
+                                                            option(value='2019') 2019
+                                                            option(value='2020') 2020
+                                                            option(value='2021') 2021
+                                                            option(value='2022') 2022
+                                                            option(value='2023') 2023
+                                                            option(value='2024') 2024
+                                                            option(value='2025') 2025
+                                                    input.form-control(style="float: right; margin-top: 10px;", type="text", ng-model='pendingForm.payment.cvv')
+
+
+                            .col-sm-12
+                                span.form-btn
+                                    button.btn.btn-primary(type='submit', style="float: right;", ng-click='addReservation()', ng-disabled='bookingButtonDisabled') Book this room for {{resDetail.cardPayment.resTotal}}
+
+
+
+                div.panel-body(ng-show="resDetail.status == 'Cancelled'")
+                    div.alert.alert-danger(role='alert') {{resDetail.status}}
+                    .col-sm-8
+                        div(style="font-weight: bold; color: #0066FF;") {{resDetail.hotel.name}}
+                            label(style="font-weight: bold; color: #FF9900; padding: 10px;") Star:
+                                |   {{resDetail.hotel.star}}
+                        div(style="font-weight: bold;") Address:
+                            label(style="font-weight: normal; padding: 10px;") {{resDetail.hotel.address}}
+                        div(style="font-weight: bold;") CheckIn:
+                            label(style="font-weight: normal; padding: 10px;") {{resDetail.hotel.checkIn}}
+                        div(style="font-weight: bold;") CheckOut:
+                            label(style="font-weight: normal; padding: 10px;") {{resDetail.hotel.checkOut}}
+
+                    table.table
+                        thead
+                            tr
+                                th Room Type
+                                th Board Type
+                                th Quantity
+                                th Adult(s)
+                                th Child
+                                th Room Rate
+                        tbody
+                            tr(ng-repeat='rooms in resDetail.roomDetails.rooms')
+                                td {{rooms.roomType}}
+                                td {{rooms.boardType}}
+                                td {{rooms.quantity}}
+                                td {{rooms.adults}}
+                                td {{rooms.child}}
+                                td {{rooms.roomRate}}

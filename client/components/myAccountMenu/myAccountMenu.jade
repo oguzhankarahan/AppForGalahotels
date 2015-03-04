@@ -1,0 +1,17 @@
+div.well(style='float: left; width: 100%; height: 100%; padding: 0px;', ng-controller='myAccountMenuCtrl')
+    img.img-thumbnail(data-src='', alt='128x128', src='', data-holder-rendered='true', style='width: 256px; height: 256px;')
+    ul.nav.nav-list
+        li.nav-header {{getCurrentUser().name}}
+        li(ng-class='{active: isActive("/myBookings")}')
+            a(href='/myBookings') My Bookings
+        li(ng-class='{active: isActive("/personalDetail")}')
+            a(href='/personalDetail') Personal Details
+        li(ng-class='{active: isActive("/myFavorites")}')
+            a(href='/myFavorites') My Favorites
+        li.disabled
+            a(href='') Customer Services
+        li(ng-class='{active: isActive("/memberRewards")}')
+            a(href='/memberRewards') Member Rewards
+        li.divider
+        li(ng-class='{active: isActive("/logout")}')
+            a(href='', ng-click='logout()') Logout

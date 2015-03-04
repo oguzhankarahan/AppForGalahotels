@@ -1,0 +1,24 @@
+{
+  "name": "angular-l10n",
+  "main": "./angular-l10n.js",
+  "dependencies": {},
+  "ignore": [
+    "test/",
+    "example/",
+    ".*",
+    "package.json",
+    "Gruntfile.js",
+    "**/*.md",
+    "**/*.coffee"
+  ],
+  "homepage": "https://github.com/truongsinh/angular-l10n",
+  "_release": "d8912afb32",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "d8912afb32d1ad9a1b67abb2e5b0404de80deba1"
+  },
+  "_source": "git://github.com/truongsinh/angular-l10n.git",
+  "_target": "*",
+  "_originalSource": "angular-l10n"
+}

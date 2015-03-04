@@ -1,0 +1,67 @@
+div.navbar.navbar-default.navbar-static-top(ng-controller='MenuCtrl', style="display: block; width: 100%; float: left;")
+    div.container
+        div.navbar-header
+                //ul.nav.nav-pills(role="tablist")
+                //    li(role="presentation", ng-show='isLoggedIn()')
+                //        p.navbar-text {{translation.menu[0].hello}} {{ getCurrentUser().name }}
+                //
+                //            //{{item.title}}
+                //    //li(ng-show='isAdmin()', ng-class='{active: isActive("/admin")}')
+                //    //  a(href='/admin') Admin
+                //
+
+
+                ul.nav.nav-pills.navbar-right(role="tablist")
+                    li(role="presentation", ng-class='{active: isActive(item.link)}')
+                        a(ng-href='/', translate='menu.home')
+
+                    li(role="presentation", ng-class='{active: isActive("/result")}')
+                        a(href='/result', translate='menu.searchResult')
+
+                    li(role="presentation", ng-hide='isLoggedIn()', ng-class='{active: isActive("/signup")}')
+                        a(href='/signup', translate='menu.register')
+
+                    li(role="presentation", ng-hide='isLoggedIn()', ng-class='{active: isActive("/login")}')
+                        a(href='/login', translate='menu.login')
+
+                    li.disabled(role="presentation")
+                        a(translate='menu.aboutUs')
+
+                    li.disabled(role="presentation")
+                        a(translate='menu.customerService')
+
+                    li(role="presentation", ng-class='{active: isActive("/destinations")}')
+                        a(href='/destinations', translate='menu.destinations')
+
+                    li(role="presentation", ng-show='isLoggedIn()', ng-class='{active: isActive("/myBookings") || isActive("/personalDetail") || isActive("/myFavorites") || isActive("/memberRewards")}')
+                        a(href='/myBookings', translate='menu.myAccount')
+
+                    //li(role="presentation", ng-show='isLoggedIn()', ng-class='{active: isActive("/settings")}')
+                    //    a(href='/settings') {{translation.menu[0].settings}}
+                    //        span.glyphicon.glyphicon-cog
+
+                    li(role="presentation", ng-show='isLoggedIn()', ng-class='{active: isActive("/logout")}')
+                        a(href='', ng-click='logout()', translate='menu.logout')
+
+                    li(role="presentation", ng-class='{active: isActive("/feedback")}')
+                        a(href='/feedback', translate='menu.feedback')
+        //section.margin-bottom-20(style="float: right;")
+        //    select.form-control(ng-change='translate()', ng-model='selectedLanguage')
+        //        option(value='en') English
+        //        option(value='tr') Türkçe
+
+
+
+        //section.margin-bottom-20(style="float: right;")
+        //    select.form-control(ng-controller='CurrencyCtrl', ng-change='currency()', ng-model='selectedCurrency')
+        //        option(value='USD') USD
+        //        option(value='EUR') EUR
+        //        option(value='TRL') TRL
+        section.margin-bottom-20(style="float: right;")
+            select.form-control(style="float: left;", ng-model='resultForm.selectedCurrencies', data-ng-options='currencies.name for currencies in galaCurrencies[0].currencies')
+
+            br
+        ul(ng-controller='TranslateCtrl')
+            button(ng-click="switchLanguage('tr-TR')", translate='BUTTON_TURKISH')
+            button(ng-click="switchLanguage('en-US')", translate='BUTTON_ENGLISH')
+

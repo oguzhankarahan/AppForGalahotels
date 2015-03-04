@@ -1,0 +1,62 @@
+{
+    "head":"baş",
+    "BUTTON_TURKISH":"Türkçe",
+    "BUTTON_ENGLISH":"İngilizce",
+    "auth":{
+        "email"             : "E-posta",
+        "password"          : "Şifre",
+        "login"             : "Giriş",
+        "register"          : "Kayıt",
+        "facebook"          : "Facebook ile bağlan",
+        "google"            : "Google+ ile bağlan",
+        "twitter"           : "Twitter ile bağlan",
+        "error"             : "E-postanızı ve şifrenizi giriniz."
+    },
+    "signUp":{
+        "email"             : "E-posta",
+        "password"          : "Şifre",
+        "name"              : "İsim",
+        "gender"            : "Cinsiyet",
+        "surname"           : "Soyad",
+        "country"           : "Ülke",
+        "city"              : "Şehir",
+        "mobilePhone"       : "Cep Telefonu",
+        "contactPhone"      : "İrtibat Telefonu",
+        "postalCode"        : "Zip / Posta Kodu",
+        "address"           : "Adres",
+        "login"             : "Giriş",
+        "register"          : "Kayıt",
+        "facebook"          : "Facebook ile bağlan",
+        "google"            : "Google+ ile bağlan",
+        "twitter"           : "Twitter ile bağlan",
+        "error3char"        : "Şifre en az 3 karakter olmalıdır.",
+        "errorInvEmail"     : "Geçersiz e-posta.",
+        "errorEmail"        : "E-posta adresiniz nedir?",
+        "errorName"         : "Bir isim gerekli"
+    },
+    "menu":{
+        "home"              : "Anasayfa",
+        "register"          : "Kayıt",
+        "login"             : "Giriş",
+        "logout"            : "Çıkış",
+        "searchResult"      : "Arama Sonucu",
+        "aboutUs"           : "Hakkımızda",
+        "customerService"   : "Müşteri Hizmetleri",
+        "destinations"      : "Destinasyonlar",
+        "myAccount"         : "Hesabım",
+        "hello"             : "Merhaba",
+        "settings"          : "Ayarlar",
+        "feedback"          : "Geri Dönüş"
+    },
+    "main":{
+        "search"            : "Arama",
+        "discountHotels"    : "İndirimli Oteller",
+        "searchAll"         : "Şehir, Landmark veya Otel Adı Ara",
+        "date"              : "Giriş - Çıkış Tarihi",
+        "rooms"             : "Oda Sayısı",
+        "room"              : "Oda",
+        "adult"             : "Yetişkin",
+        "child"             : "Çocuk",
+        "searchNow"         : "Rezervasyon Ara"
+    }
+}

@@ -1,0 +1,60 @@
+div(ng-controller='MapCtrl')
+    .row
+        .col-md-4
+            .panel.panel-default
+                ul.list-group(ng-click='mapHotel = true', ng-show="currentPath === '/result'", ng-hide="currentPath !== '/result'")
+                    h3(style='margin: auto;') Hotels
+                    a.list-group-item(style='font-size: 14px;', ng-click='select(item)', ng-repeat='item in maps') {{item.hotelName}}
+
+        .col-md-8
+            .panel.panel-default
+                my-maps#map-canvas
+                table.table(ng-show="currentPath === '/result'", ng-hide="currentPath !== '/result'")
+                    thead
+                        tr
+                            th Hotel Name
+                            th Address
+                            th Star
+                            th Distance
+                            th Latitude
+                            th Longitude
+                            th Price
+                    tbody
+                        tr
+                            td {{selected.hotelName}}
+                            td {{selected.address}}
+                            td {{selected.star}}
+                            td {{selected.distance}}
+                            td {{selected.latitude}}
+                            td {{selected.longitude}}
+                            td(ng-show='selected.sid != null')
+                                span.label.label-danger {{selected.price.oldPrice}}
+                                br
+                                span.label.label-success {{selected.price.currentPrice}}
+                                br
+                                span.label.label-warning {{selected.price.earn}}
+                table.table(ng-hide="currentPath === '/result'", ng-show="currentPath !== '/result'")
+                    thead
+                        tr
+                            th Hotel Name
+                            th Address
+                            th Star
+                            th Distance
+                            th Latitude
+                            th Longitude
+                            th Price
+                    tbody
+                        tr
+                            td {{maps[selectedHotel].hotelName}}
+                            td {{maps[selectedHotel].address}}
+                            td {{maps[selectedHotel].star}}
+                            td {{maps[selectedHotel].distance}}
+                            td {{maps[selectedHotel].latitude}}
+                            td {{maps[selectedHotel].longitude}}
+                            td(ng-show='maps[selectedHotel].sid != null')
+                                span.label.label-danger {{maps[selectedHotel].price.oldPrice}}
+                                br
+                                span.label.label-success {{maps[selectedHotel].price.currentPrice}}
+                                br
+                                span.label.label-warning {{maps[selectedHotel].price.earn}}
+                button.nav-clear.btn.btn-default(type='button', ng-click="go('/detail/' + selected.hid)", style="float: right;", ng-show='mapHotel == true', ng-hide='mapHotel != true') Book Now

@@ -1,0 +1,60 @@
+div(ng-include='"components/menu/menu.html"')
+
+div.panel.panel-primary(style="width: 50%; margin: auto;")
+    div.panel-heading
+        h3.panel-title Personal Details
+    div.panel-body
+        .row
+            .col-sm-4(style="width: 30%;")
+                div(ng-include='"components/myAccountMenu/myAccountMenu.html"')
+            .col-sm-6(style="width: 70%;")
+                form.form(name='passwordForm', ng-submit='changePassword(passwordForm)', novalidate='')
+                    .form-group
+                        label Current Password
+                        input.form-control(type='password', name='password', ng-model='user.oldPassword', mongoose-error='')
+                        p.help-block(ng-show='passwordForm.password.$error.mongoose')
+                            | {{ errors.other }}
+                    .form-group
+                        label New Password
+                        input.form-control(type='password', name='newPassword', ng-model='user.newPassword', ng-minlength='3', required='')
+                    p.help-block  {{ messagePassword }}
+                    button.btn.btn-lg.btn-primary(type='submit', ng-disabled='passwordButtonDisabled') Save password
+                hr
+
+                form.form(name='detailForm', ng-submit='changeDetail(detailForm)')
+                    .form-group
+                        label   Gender
+                        section
+                            select.form-control(name='gender', ng-model='user.gender')
+                                option(value='mr') Mr.
+                                option(value='mrs') Mrs.
+                    .form-group
+                        label   Name
+                        input.form-control(type='text', name='username', ng-model='user.username', placeholder="{{getCurrentUser().name}}")
+                    .form-group
+                        label   Surname
+                        input.form-control(type='text', name='surname', ng-model='user.surname', placeholder="{{getCurrentUser().surname}}")
+                    .form-group
+                        label   Email
+                        div   {{getCurrentUser().email}}
+                    .form-group
+                        label   Billing Address
+                        input.form-control(type='text', name='address', ng-model='user.address', placeholder="{{getCurrentUser().address}}")
+                    .form-group
+                        label   Country
+                        select.form-control(data-ng-options='country.name for country in countries[0].countries', name='country', ng-model='user.country')
+                    .form-group
+                        label   City
+                        input.form-control(type='text', name='city', ng-model='user.city', placeholder="{{getCurrentUser().city}}")
+                    .form-group
+                        label   Zip / Postal Code
+                        input.form-control(type='text', name='postalCode', ng-model='user.postalCode', placeholder="{{getCurrentUser().postalCode}}")
+                    .form-group
+                        label   Mobile Phone
+                        input.form-control(type='text', name='mobilePhone', ng-model='user.mobilePhone', placeholder="{{getCurrentUser().mobilePhone}}")
+                    .form-group
+                        label   Contact Phone
+                        input.form-control(type='text', name='contactPhone', ng-model='user.contactPhone', placeholder="{{getCurrentUser().contactPhone}}")
+                    p.help-block  {{ messageDetail }}
+                    button.btn.btn-lg.btn-primary(type='submit', ng-disabled='detailButtonDisabled') Save changes
+

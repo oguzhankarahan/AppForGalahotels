@@ -1,0 +1,62 @@
+{
+    "head":"header",
+    "BUTTON_ENGLISH":"English",
+    "BUTTON_TURKISH":"Turkish",
+    "auth":{
+        "email"             : "Email",
+        "password"          : "Password",
+        "login"             : "Login",
+        "register"          : "Register",
+        "facebook"          : "Connect with Facebook",
+        "google"            : "Connect with Google+",
+        "twitter"           : "Connect with Twitter",
+        "error"             : "Please enter your email and password."
+    },
+    "signUp":{
+        "email"             : "Email",
+        "password"          : "Password",
+        "name"              : "Name",
+        "gender"            : "Gender",
+        "surname"           : "Surname",
+        "country"           : "Country",
+        "city"              : "City",
+        "mobilePhone"       : "Mobile Phone",
+        "contactPhone"      : "Contact Phone",
+        "postalCode"        : "Zip / Postal Code",
+        "address"           : "Address",
+        "login"             : "Login",
+        "register"          : "Register",
+        "facebook"          : "Connect with Facebook",
+        "google"            : "Connect with Google+",
+        "twitter"           : "Connect with Twitter",
+        "error3char"        : "Password must be at least 3 characters.",
+        "errorInvEmail"     : "Invalid email.",
+        "errorEmail"        : "What's your email address?",
+        "errorName"         : "A name is required"
+    },
+    "menu":{
+        "home"              : "Home",
+        "register"          : "Sign up",
+        "login"             : "Login",
+        "logout"            : "Logout",
+        "searchResult"      : "Search Result",
+        "aboutUs"           : "About Us",
+        "customerService"   : "Customer Service",
+        "destinations"      : "Destinations",
+        "myAccount"         : "My Account",
+        "hello"             : "Hello",
+        "settings"          : "Settings",
+        "feedback"          : "Feedback"
+    },
+    "main":{
+        "search"            : "Search",
+        "discountHotels"    : "Discount Hotels",
+        "searchAll"         : "Search City, Landmark or Hotel Name",
+        "date"              : "Check-in - Check-out Date",
+        "rooms"             : "Room(s)",
+        "room"              : "Room",
+        "adult"             : "Adult",
+        "child"             : "Child",
+        "searchNow"         : "Search Now"
+    }
+}

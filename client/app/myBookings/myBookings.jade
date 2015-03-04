@@ -1,0 +1,34 @@
+div(ng-include='"components/menu/menu.html"')
+div.panel.panel-primary(style="width: 50%; margin: auto;")
+    div.panel-heading
+        h3.panel-title My Bookings
+    div.panel-body
+        .row
+            .col-sm-4(style="width: 30%;")
+                div(ng-include='"components/myAccountMenu/myAccountMenu.html"')
+            .col-sm-12(style="width: 70%;")
+                table.table.table-striped
+                    thead
+                        tr
+                            th Booking Id
+                            th Status
+                            th Hotel
+                            th City
+                            th Check In
+                            th Check Out
+                            th Total
+                            th #
+                    tbody
+                        tr(ng-repeat='booking in bookings')
+                            td {{booking.bid}}
+                            td
+                                span.label.label-danger(ng-show="booking.status == 'Cancelled'") {{booking.status}}
+                                span.label.label-warning(ng-show="booking.status == 'Pending'") {{booking.status}}
+                                span.label.label-success(ng-show="booking.status == 'Confirmed'") {{booking.status}}
+                            td {{booking.hotelName}}
+                            td {{booking.city}}
+                            td {{booking.checkIn}}
+                            td {{booking.checkOut}}
+                            td {{booking.total}}
+                            td
+                                button.nav-clear.btn.btn-default(type='button', ng-click="go('/reservationDetail/' + booking.bid)") go

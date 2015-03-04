@@ -1,0 +1,99 @@
+div(ng-include='"components/menu/menu.html"')
+.container
+  .row
+    .col-sm-12
+      h1(translate='signUp.register')
+    .col-sm-12
+      form.form(name='form', ng-submit='register(form)', novalidate='')
+        .form-group(ng-class='{ "has-success": form.gender.$valid && submitted,\
+        "has-error": form.gender.$invalid && submitted }')
+              label(translate='signUp.gender')
+              section
+                  select.form-control(name='gender', ng-model='user.gender', required='')
+                      option(value='mr') Mr.
+                      option(value='mrs') Mrs.
+              p.help-block(ng-show='form.gender.$error.required && submitted', translate='signUp.errorName')
+
+        .form-group(ng-class='{ "has-success": form.name.$valid && submitted,\
+        "has-error": form.name.$invalid && submitted }')
+          label(translate='signUp.name')
+          input.form-control(type='text', name='name', ng-model='user.name', required='')
+          p.help-block(ng-show='form.name.$error.required && submitted', translate='signUp.errorName')
+
+        .form-group(ng-class='{ "has-success": form.surname.$valid && submitted,\
+        "has-error": form.surname.$invalid && submitted }')
+            label(translate='signUp.surname')
+            input.form-control(type='text', name='surname', ng-model='user.surname', required='')
+            p.help-block(ng-show='form.surname.$error.required && submitted', translate='signUp.errorName')
+
+        .form-group(ng-class='{ "has-success": form.email.$valid && submitted,\
+        "has-error": form.email.$invalid && submitted }')
+          label(translate='signUp.email')
+          input.form-control(type='email', name='email', ng-model='user.email', required='', mongoose-error='')
+          p.help-block(ng-show='form.email.$error.email && submitted', translate='signUp.errorInvEmail')
+          p.help-block(ng-show='form.email.$error.required && submitted', translate='signUp.errorEmail')
+          p.help-block(ng-show='form.email.$error.mongoose')
+            | {{ errors.email }}
+
+        .form-group(ng-class='{ "has-success": form.password.$valid && submitted,\
+        "has-error": form.password.$invalid && submitted }')
+          label(translate='signUp.password')
+          input.form-control(type='password', name='password', ng-model='user.password', ng-minlength='3', required='', mongoose-error='')
+          p.help-block(ng-show='(form.password.$error.minlength || form.password.$error.required) && submitted', translate='signUp.error3char')
+          p.help-block(ng-show='form.password.$error.mongoose')
+            | {{ errors.password }}
+
+        .form-group(ng-class='{ "has-success": form.country.$valid && submitted,\
+        "has-error": form.country.$invalid && submitted }')
+          label(translate='signUp.country')
+          select.form-control(data-ng-options='country.name for country in countries[0].countries', name='country', ng-model='user.country', required='')
+          p.help-block(ng-show='form.country.$error.required && submitted', translate='signUp.errorName')
+
+        .form-group(ng-class='{ "has-success": form.city.$valid && submitted,\
+        "has-error": form.city.$invalid && submitted }')
+              label(translate='signUp.city')
+              input.form-control(type='text', name='city', ng-model='user.city', required='')
+              p.help-block(ng-show='form.city.$error.required && submitted', translate='signUp.errorName')
+
+        .form-group(ng-class='{ "has-success": form.mobilePhone.$valid && submitted,\
+        "has-error": form.mobilePhone.$invalid && submitted }')
+              label(translate='signUp.mobilePhone')
+              input.form-control(type='text', name='mobilePhone', ng-model='user.mobilePhone', required='')
+              p.help-block(ng-show='form.mobilePhone.$error.required && submitted')
+                  | {{translation.signUp[0].errorName}}
+
+        .form-group(ng-class='{ "has-success": form.contactPhone.$valid && submitted,\
+        "has-error": form.contactPhone.$invalid && submitted }')
+              label(translate='signUp.contactPhone')
+              input.form-control(type='text', name='contactPhone', ng-model='user.contactPhone', required='')
+              p.help-block(ng-show='form.contactPhone.$error.required && submitted', translate='signUp.errorName')
+
+        .form-group(ng-class='{ "has-success": form.postalCode.$valid && submitted,\
+        "has-error": form.postalCode.$invalid && submitted }')
+              label(translate='signUp.postalCode')
+              input.form-control(type='text', name='postalCode', ng-model='user.postalCode', required='')
+              p.help-block(ng-show='form.postalCode.$error.required && submitted', translate='signUp.errorName')
+
+        .form-group(ng-class='{ "has-success": form.address.$valid && submitted,\
+        "has-error": form.address.$invalid && submitted }')
+            label(translate='signUp.address')
+            input.form-control(type='text', name='address', ng-model='user.address', required='')
+            p.help-block(ng-show='form.address.$error.required && submitted', translate='signUp.errorName')
+        div
+          button.btn.btn-inverse.btn-lg.btn-login(type='submit', translate='signUp.register')
+          = ' '
+          a.btn.btn-default.btn-lg.btn-register(href='/login', translate='signUp.login')
+
+
+        hr
+
+        div
+          a.btn.btn-facebook(href='', ng-click='loginOauth("facebook")')
+            i.fa.fa-facebook(translate='signUp.facebook')
+          = ' '
+          a.btn.btn-google-plus(href='', ng-click='loginOauth("google")')
+            i.fa.fa-google-plus(translate='signUp.google')
+          = ' '
+          a.btn.btn-twitter(href='', ng-click='loginOauth("twitter")')
+            i.fa.fa-twitter(translate='signUp.twitter')
+  hr

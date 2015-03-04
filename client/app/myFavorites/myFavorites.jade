@@ -1,0 +1,25 @@
+div(ng-include='"components/menu/menu.html"')
+div.panel.panel-primary(style="width: 50%; margin: auto;")
+    div.panel-heading
+        h3.panel-title Personal Details
+    div.panel-body
+        .row
+            .col-sm-4(style="width: 30%;")
+                div(ng-include='"components/myAccountMenu/myAccountMenu.html"')
+            .col-sm-6(style="width: 70%;")
+                  .media(ng-repeat='favorites in favorites')
+                        a.media-left
+                            img(data-src='', alt='128x128', src='', data-holder-rendered='true', style='width: 128px; height: 128px;')
+                        .media-right(style="width: 450px;")
+                            h4.media-heading(style="font-weight: bold;") {{favorites.hotelName}}
+                            h5(style="font-weight: bold; color: #FF9900;") Star: {{favorites.star}}
+                            h6 {{favorites.address}}
+                            h6
+                                label Rate: {{favorites.tripAdvisor.rate}}
+                                label Score from: {{favorites.tripAdvisor.score}} reviews
+                            div
+                                button.nav-clear.btn.btn-default(type='button', ng-click='go("/detail/" + favorites.hid)', style="float: right;") Book Now
+                                br
+                            br
+                        hr(style="width: 100%;")
+

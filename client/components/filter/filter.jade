@@ -1,0 +1,64 @@
+div.well(style='float: left; width: 100%; height: 100%; padding: 0px;', ng-controller='filterCtrl')
+    div.well(style='float: left; width: 100%; height: 100%; padding: 20px; background-color: #2e6294;', ng-repeat='recentSearches in recentSearches', ng-if="$index == 0")
+        p.input-group
+            form(name='recentSearchForm', ng-submit='recentSearchFunc(recentSearchForm)')
+                div(ng-model='recentSearchForm.state.country')
+                div(ng-model='recentSearchForm.state.city')
+                span.label.label-warning(style='font-size: 20px; margin: auto;') {{recentSearches.city}} , {{recentSearches.country.name}}
+                h5 Check-in Date
+                input.form-control(type='text', ng-model='recentSearchForm.date.fromDate', ng-change='recentSearches.checkIn = recentSearchForm.date.fromDate', data-max-date='{{recentSearchForm.date.untilDate}}', placeholder='{{recentSearches.checkIn}}', data-autoclose="true", data-min-date="today", bs-datepicker='')
+                h5 Check-out Date
+                input.form-control(type='text', ng-model='recentSearchForm.date.untilDate', ng-change='recentSearches.checkOut = recentSearchForm.date.untilDate', data-min-date='{{recentSearchForm.date.fromDate}}', placeholder='{{recentSearches.checkOut}}', data-autoclose="true", bs-datepicker='')
+                .form-group
+                    h5 Room(s)
+                    section
+                        select(ng-model='recentSearchForm.person.room', ng-change='recentSearches.rooms.room = recentSearchForm.person.room', ng-init='recentSearchForm.person.room = recentSearches.rooms.room', ng-options='rooms for rooms in search[0].room', style='color: black;')
+
+                .form-group(ng-repeat='room in search[0].room', ng-if="$index < recentSearchForm.person.room")
+                    h5 Room {{$index+1}} :
+                    section
+                        h5 Adult(s)
+                            select(ng-model='recentSearchForm.person[$index+1].roomID[$index+1].adult', ng-init='recentSearchForm.person[$index+1].roomID[$index+1].adult = recentSearches.rooms.person[$index].adult', ng-change='recentSearches.rooms.person[$index].adult = recentSearchForm.person[$index+1].roomID[$index+1].adult', ng-options='adults for adults in search[0].adult', style='color: black;')
+                        h5 Child(s)
+                            select(ng-model='recentSearchForm.person[$index+1].roomID[$index+1].child', ng-init='recentSearchForm.person[$index+1].roomID[$index+1].child = recentSearches.rooms.person[$index].child', ng-change='recentSearches.rooms.person[$index].child = recentSearchForm.person[$index+1].roomID[$index+1].child', ng-options='children for children in search[0].child', style='color: black;')
+
+                     br
+                button.nav-clear.btn.btn-warning.form-control(type='submit', ng-click="recentSearchFunc()", ng-disabled='searchButtonDisabled') Search
+
+    p.input-group
+        form(name='filterForm', ng-submit='filterFunc(filterForm)', ng-show="currentPath === '/result'", ng-hide="currentPath !== '/result'")
+            ul.nav.nav-list
+
+                h4 Hotel Name
+                    span.caret
+                form.form-search
+                    input.input-medium.search-query.form-control(type='text', ng-model='filterForm.hotelName', placeholder='Search by Hotel Name')
+                h4 Price
+                    span.caret
+                label(ng-repeat='price in filters[0].price')
+                    input(type='checkbox', value='price', ng-model='filterForm.filter.price[$index+1]')
+                    span.label.label-info {{price}}
+
+                h4 Stars
+                    span.caret
+                .checkbox
+                    label(ng-repeat='star in filters[0].star')
+                        input(type='checkbox', value='star', ng-model='filterForm.filter.star[$index+1]')
+                        span.label.label-warning {{star}}
+
+                h4 Guest Reviews
+                    span.caret
+                .checkbox
+                    label(ng-repeat='reviews in filters[0].reviews')
+                        input(type='checkbox', value='reviews', ng-model='filterForm.filter.reviews[$index+1]')
+                        span.label.label-success {{reviews}}
+
+                h4 Landmark
+                    span.caret
+                .checkbox
+                    label(ng-repeat='landmark in filters[0].landmark')
+                        input(type='checkbox', value='reviews', ng-model='filterForm.filter.landmark[$index+1]')
+                        span.label.label-danger {{landmark}}
+
+                li.divider
+                button.nav-clear.btn.btn-primary.form-control(type='submit', ng-click="filterFunc()", ng-disabled='filterButtonDisabled') Filter

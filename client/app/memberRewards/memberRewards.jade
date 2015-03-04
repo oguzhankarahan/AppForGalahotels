@@ -1,0 +1,35 @@
+div(ng-include='"components/menu/menu.html"')
+div.panel.panel-primary(style="width: 50%; margin: auto;")
+    div.panel-heading
+        h3.panel-title Member Rewards
+    div.panel-body
+        .row
+            .col-sm-4(style="width: 30%;")
+                div(ng-include='"components/myAccountMenu/myAccountMenu.html"')
+            .col-sm-6(style="width: 70%;")
+                div(ng-repeat='rewards in rewards') {{rewards.info}}
+                hr
+                .media(ng-repeat='rewards in rewards')
+                    .media-left
+                            .media-body
+                                .row(style='width: 800px;')
+                                    .col-sm-2
+                                         span.badge {{rewards.rid}}
+                                    .col-sm-6
+                                        h6 Valid Dates:
+                                            label  {{rewards.validDates.startDate}}
+                                            |  -
+                                            label  {{rewards.validDates.endDate}}
+                                        h6 Status:
+                                            label(ng-show="rewards.status == 'Active'",style="font-weight: bold; color: green;") {{rewards.status}}
+                                            label(ng-show="rewards.status == 'Passive'",style="font-weight: bold; color: red;") {{rewards.status}}
+                                    .col-sm-4(style="float: right;")
+                                        span.label.label-success(ng-show="rewards.status == 'Active'") {{rewards.price}}
+                                        span.label.label-default(ng-show="rewards.status == 'Passive'") {{rewards.price}}
+                    hr(style="width: 100%;")
+                div(style="float: right;") Total:
+                    div(style="float: right;", ng-repeat='rewards in rewards')
+                        label(style="color: green; margin-left: 5px;") {{rewards.total}}
+                hr(style="width: 100%;")
+
+

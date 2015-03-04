@@ -1,0 +1,59 @@
+div(ng-include='"components/menu/menu.html"')
+.container
+    div.panel.panel-primary
+        div.panel-heading
+            h3.panel-title Destinations
+        div.panel-body
+            table.table
+                thead
+                    tr
+                        th Europe
+                        th Asia
+                        th Africa
+                        th America
+                        th Antartica
+                        th Australia
+                tbody
+                    tr
+                        td
+                            div(ng-repeat='countries in destinations[0].continent[0].europe')
+                                span.label.label-info(style='font-size: 16px;') {{countries.name}}
+                                br
+                                div(ng-repeat='states in countries.states')
+                                    span.label.label-warning(style='font-size: 12px;', ng-click="go('/result')") {{states}}
+                                hr
+                        td
+                            div(ng-repeat='countries in destinations[0].continent[1].asia')
+                                span.label.label-info(style='font-size: 16px;') {{countries.name}}
+                                br
+                                div(ng-repeat='states in countries.states')
+                                    span.label.label-warning(style='font-size: 12px;', ng-click="go('/result')") {{states}}
+                                hr
+                        td
+                            div(ng-repeat='countries in destinations[0].continent[2].africa')
+                                span.label.label-info(style='font-size: 16px;') {{countries.name}}
+                                br
+                                div(ng-repeat='states in countries.states')
+                                    span.label.label-warning(style='font-size: 12px;', ng-click="go('/result')") {{states}}
+                                hr
+                        td
+                            div(ng-repeat='countries in destinations[0].continent[3].america')
+                                span.label.label-info(style='font-size: 16px;') {{countries.name}}
+                                br
+                                div(ng-repeat='states in countries.states')
+                                    span.label.label-warning(style='font-size: 12px;', ng-click="go('/result')") {{states}}
+                                hr
+                        td
+                            div(ng-repeat='countries in destinations[0].continent[4].antartica')
+                                span.label.label-info(style='font-size: 16px;') {{countries.name}}
+                                br
+                                div(ng-repeat='states in countries.states')
+                                    span.label.label-warning(style='font-size: 12px;', ng-click="go('/result')") {{states}}
+                                hr
+                        td
+                            div(ng-repeat='countries in destinations[0].continent[5].australia')
+                                span.label.label-info(style='font-size: 16px;') {{countries.name}}
+                                br
+                                div(ng-repeat='states in countries.states')
+                                    span.label.label-warning(style='font-size: 12px;', ng-click="go('/result')") {{states}}
+                                hr

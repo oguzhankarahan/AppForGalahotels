@@ -1,0 +1,68 @@
+div(ng-include='"components/menu/menu.html"')
+
+p.input-group
+    form(name='resultForm')
+        div.panel.panel-primary(style="width: 50%; margin: auto;", ng-show='mapClick == true', ng-hide='mapClick != true')
+            div.panel-heading
+                h3.panel-title Map
+            div.panel-body
+                .row
+                    .col-sm-12(style="width: 100%;")
+                        div(ng-include='"components/myMap/myMap.html"')
+        div.panel.panel-primary(style="width: 50%; margin: auto;")
+            div.panel-heading
+                h3.panel-title Search Result
+                    button.nav-clear.btn.btn-default(type='button', ng-click="reverse=!reverse;order('name',reverse)", style='float: right; margin-top: -15px;') Alphabetic
+                    button.nav-clear.btn.btn-default(type='button', ng-click="reverse=!reverse;order('star',reverse)", style='float: right; margin-top: -15px;') Star Rating
+                    button.nav-clear.btn.btn-default(type='button', ng-click="reverse=!reverse;order('tripAdvisor.rate',reverse)", style='float: right; margin-top: -15px;') User Rating
+                    button.nav-clear.btn.btn-default(type='button', ng-click="reverse=!reverse;order('roomsRate.total',reverse)", style='float: right; margin-top: -15px;') Price
+                    button.nav-clear.btn.btn-default(type='button', ng-click="reverse=!reverse;order('price.earn',reverse)", style='float: right; margin-top: -15px;') Distance
+                    button.nav-clear.btn.btn-default(type='button', ng-click="reverse=!reverse;order('tripAdvisor.score',reverse)", style='float: right; margin-top: -15px;') Popularity
+
+            div.panel-body
+                .row
+                    .col-sm-4(style="width: 30%;")
+                        div(ng-include='"components/filter/filter.html"')
+                        img(data-src='', alt='MAP', src='', data-holder-rendered='true', style='width: 100%; height: 100%;', ng-click='mapClick = true')
+                    .col-sm-6(style="width: 70%;")
+                        .media(ng-repeat='hotel in hotels')
+                            a.media-left
+                                img(data-src='', alt='128x128', src='', data-holder-rendered='true', style='width: 128px; height: 128px;')
+                            .media-right(style="width: 450px;")
+                                h4.media-heading(style="font-weight: bold;") {{hotel.name}}
+                                span.label.label-warning Star: {{hotel.star}}
+                                h6 {{hotel.address}}
+                                h6
+                                    label Rate:
+                                    span.label.label-info {{hotel.tripAdvisor.rate}}
+                                    br
+                                    label Score from:
+                                    span.label.label-success {{hotel.tripAdvisor.score}} reviews
+
+                                table(class="table table-bordered")
+                                        tr(ng-repeat='rooms in hotel.roomsRate.rooms')
+                                            td {{rooms.type}}
+                                            td {{rooms.board}}
+                                            td(style="text-align:right") {{ (rooms.price.currentPrice*resultForm.selectedCurrencies.value) | number:1 }} {{resultForm.selectedCurrencies.name}}
+                                            td(style="text-align:right") {{ (rooms.price.oldPrice*resultForm.selectedCurrencies.value) | number:1 }} {{resultForm.selectedCurrencies.name}}
+                                        tr(ng-if="hotel.roomsRate.total != null ")
+                                            td(colspan="3",style="text-align:right")
+                                                b(style="color: green")  {{ (hotel.roomsRate.total*resultForm.selectedCurrencies.value) | number:1 }} {{resultForm.selectedCurrencies.name}}
+                                            //td(colspan="3",style="text-align:right")
+                                            //    b(style="color: green", currency-display='hotel.roomsRate.total')
+
+                                br
+                                div(style='float: right; width: 160px;')
+                                    label Old Price:
+                                    span.label.label-danger(style='float:right;') {{ (hotel.price.old*resultForm.selectedCurrencies.value) | number:1 }} {{resultForm.selectedCurrencies.name}}
+                                    br
+                                    label Lowest Price:
+                                    span.label.label-success(style='float:right;') {{ (hotel.price.default*resultForm.selectedCurrencies.value) | number:1 }} {{resultForm.selectedCurrencies.name}}
+                                    br
+                                    label Earn:
+                                    span.label.label-warning(style='float:right;') {{ (hotel.price.earn*resultForm.selectedCurrencies.value) | number:0 }}
+                                    br
+                                    button.nav-clear.btn.btn-default(type='button', ng-click="go('/detail/' + hotel.hid)", style="float: right;") Book Now
+                                    br
+                                br
+                            hr(style="width: 100%;")

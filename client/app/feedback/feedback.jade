@@ -1,0 +1,31 @@
+div(ng-include='"components/menu/menu.html"')
+
+div.panel.panel-primary(style="width: 50%; margin: auto;")
+    div.panel-heading
+        h3.panel-title Feedback
+    div.panel-body
+        .row
+            .container
+                div.navbar-header
+                    button.nav-clear.btn.btn-default(type='button', ng-click='back()') Back
+                div(style="margin: auto; margin-top: 50px; width: 80%;")
+                    div.alert.alert-warning(role='alert') {{feedbacks[0].info}}
+                    table.table.table-striped
+                        thead
+                            tr
+                                th {{feedbacks[0].choices[0].headQuestion}}
+                                th(ng-repeat='answer in feedbacks[0].choices[0].answers')
+                                    div {{answer}}
+                        tbody
+                            tr(ng-repeat='question in feedbacks[0].choices[0].questions')
+                                td {{question}}
+                                td
+                                    input(type='radio', ng-value="true" , name='questionRadio{{$index}}', ng-model='questionRadio1[$index]')
+                                td
+                                    input(type='radio', ng-value="true" ,name='questionRadio{{$index}}', ng-model='questionRadio2[$index]')
+                                td
+                                    input(type='radio', ng-value="true" ,checked="checked" , name='questionRadio{{$index}}', ng-model='questionRadio3[$index]')
+                                td
+                                    input(type='radio', ng-value="true" ,name='questionRadio{{$index}}', ng-model='questionRadio4[$index]')
+                                td
+                                    input(type='radio',ng-value="true" , name='questionRadio{{$index}}', ng-model='questionRadio5[$index]')

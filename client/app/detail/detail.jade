@@ -1,0 +1,68 @@
+div(ng-include='"components/menu/menu.html"')
+div.panel.panel-primary(style="width: 50%; margin: auto;", ng-show='mapClick == true', ng-hide='mapClick != true')
+    div.panel-heading
+        h3.panel-title Map
+    div.panel-body
+        .row
+            .col-sm-12(style="width: 100%;")
+                div(ng-include='"components/myMap/myMap.html"')
+div.panel.panel-primary(style="width: 50%; margin: auto;")
+    div.panel-heading
+        h3.panel-title Search Result
+    div.panel-body
+        .row
+            .col-sm-4(style="width: 30%;")
+                div(ng-include='"components/filter/filter.html"')
+                img(data-src='', alt='MAP', src='', data-holder-rendered='true', style='width: 100%; height: 100%;', ng-click='mapClick = true')
+            .col-sm-6(style="width: 70%;")
+                .container
+                    div.navbar-header
+                        button.nav-clear.btn.btn-default(type='button', ng-click='back()') Back
+                    div(style="margin: auto; margin-top: 50px; width: 80%;")
+                        div {{hotel.name}}
+                        br
+                        br
+                        div {{hotel.address}}
+                        br
+                        br
+                        div {{hotel.cancellation}}
+                        br
+                        br
+                        div
+                            b Hotel Location
+                            p {{hotel.info.hotelLocation}}
+                            b Hotel Rooms
+                            p {{hotel.info.hotelRooms}}
+                        br
+                        br
+                        div
+                            | {{hotel.tripAdvisor.rate}}
+                            br
+                            | {{hotel.tripAdvisor.score}} review
+                        br
+                        br
+                        div
+                            table(class="table table-bordered")
+                                tr(ng-repeat='item in hotel.roomsRate.rooms')
+                                    td {{item.type}}
+                                    td {{item.board}}
+                                    td(style="text-align:right") {{item.price.currentPrice}}
+                                    td(style="text-align:right") {{item.price.oldPrice}}
+                                tr(ng-if="hotel.roomsRate.total != null ")
+                                    td(colspan="3",style="text-align:right")
+                                        b(style="color: green") {{hotel.roomsRate.total}}
+                        br
+                        br
+                        div
+                            |   {{hotel.price.default}}
+                            br
+                            |   {{hotel.price.old}}
+                            br
+                            |   {{hotel.price.earn}}
+                        br
+                        br
+                        div(ng-repeat='general in hotel.amenities.general') {{general}}
+                        br
+                        div(ng-repeat='internet in hotel.amenities.internet') {{internet}}
+
+                        button.nav-clear.btn.btn-default(type='button', ng-click="go('/payment/' + hotel.hid)", style='float: right;') Book Now
