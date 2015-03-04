@@ -2,11 +2,7 @@
 
 REQUIREMENTS
 
-node install
-
-mongoDB install
-
-bower install
+node, mongoDB, bower
 
 RUN PROJECT
 
